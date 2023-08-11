@@ -1,0 +1,17 @@
+name: scip
+
+on:
+  pull_request:
+
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: coursier/setup-action@v1.3.3
+        with:
+          jvm: corretto:17
+
+      - name: Run scip-java
+        shell: bash
+        run: cs launch com.sourcegraph:scip-java_2.13:0.9.2 -M com.sourcegraph.scip_java.ScipJava -- index
